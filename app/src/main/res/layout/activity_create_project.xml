@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/et_project_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/nombre_del_proyecto"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="48sp"
+            android:layout_marginHorizontal="48sp"
+            />
+
+        <EditText
+            android:id="@+id/et_project_description"
+            android:hint="@string/descripci_n"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="48sp"
+            android:layout_marginTop="16sp"
+            app:layout_constraintTop_toBottomOf="@id/et_project_name"/>
+
+        <EditText
+            android:id="@+id/et_project_priority"
+            android:hint="@string/prioridad_1_5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:layout_marginHorizontal="48sp"
+            android:layout_marginTop="16sp"
+            app:layout_constraintTop_toBottomOf="@id/et_project_description"/>
+
+        <EditText
+            android:id="@+id/et_project_hours"
+            android:hint="@string/horas_estimadas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:layout_marginHorizontal="48sp"
+            android:layout_marginTop="16sp"
+            app:layout_constraintTop_toBottomOf="@id/et_project_priority"/>
+
+        <Spinner
+            android:id="@+id/spn_language"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="48sp"
+            android:layout_marginTop="16sp"
+            app:layout_constraintTop_toBottomOf="@id/et_project_hours"/>
+
+        <Button
+            android:id="@+id/btn_start_date"
+            android:text="@string/seleccionar_fecha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="96sp"
+            android:layout_marginTop="48sp"
+            app:layout_constraintTop_toBottomOf="@id/spn_language"/>
+
+        <Button
+            android:id="@+id/save_project_button"
+            android:text="@string/guardar_proyecto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="96sp"
+            android:layout_marginTop="16sp"
+            app:layout_constraintTop_toBottomOf="@id/btn_start_date"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+
