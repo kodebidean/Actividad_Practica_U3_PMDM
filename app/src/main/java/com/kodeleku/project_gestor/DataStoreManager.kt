@@ -16,7 +16,7 @@ object DataStoreManager {
     // Claves para los datos que se almacenarán
     private val USERNAME_KEY = stringPreferencesKey("username")
     private val PASSWORD_KEY = stringPreferencesKey("password")
-    private val LOGGED_IN_KEY = booleanPreferencesKey("logged_in")
+    private val IS_LOGGED_IN = booleanPreferencesKey("logged_in")
 
     // Guardar las credenciales del usuario (usuario y contraseña)
     suspend fun saveCredentials(context: Context, username: String, password: String) {
@@ -26,17 +26,17 @@ object DataStoreManager {
         }
     }
 
-    // Guardar el estado de inicio de sesión
-    suspend fun setLoggedIn(context: Context, loggedIn: Boolean) {
+    // Guardar estado de sesión
+    suspend fun setLoggedIn(context: Context, isLoggedIn: Boolean) {
         context.dataStore.edit { preferences ->
-            preferences[LOGGED_IN_KEY] = loggedIn
+            preferences[IS_LOGGED_IN] = isLoggedIn
         }
     }
 
-    // Obtener el estado de inicio de sesión
+    // Obtener estado de sesión
     fun isLoggedIn(context: Context): Flow<Boolean> {
         return context.dataStore.data.map { preferences ->
-            preferences[LOGGED_IN_KEY] ?: false
+            preferences[IS_LOGGED_IN] ?: false
         }
     }
 

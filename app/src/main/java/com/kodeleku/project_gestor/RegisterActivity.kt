@@ -4,11 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.lifecycleScope
 import com.kodeleku.project_gestor.databinding.ActivityRegisterBinding
 import kotlinx.coroutines.launch
 
-class RegisterActivity : AppCompatActivity() {
+class RegisterActivity : BaseActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
 
@@ -18,6 +19,9 @@ class RegisterActivity : AppCompatActivity() {
         // Configurar ViewBinding
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Insertar Toolbar
+        setSupportActionBar(findViewById(R.id.toolbar))
 
         // Manejo del botón de registro
         binding.btnRegister.setOnClickListener {
@@ -37,6 +41,7 @@ class RegisterActivity : AppCompatActivity() {
                 Toast.makeText(this, "Completa todos los campos", Toast.LENGTH_SHORT).show()
             }
         }
+
     }
 }
 

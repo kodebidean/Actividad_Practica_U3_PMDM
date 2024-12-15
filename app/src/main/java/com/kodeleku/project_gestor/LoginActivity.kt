@@ -3,13 +3,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.lifecycleScope
 import com.kodeleku.project_gestor.databinding.ActivityLoginBinding
 
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : BaseActivity() {
 
     private lateinit var binding: ActivityLoginBinding
 
@@ -19,6 +20,9 @@ class LoginActivity : AppCompatActivity() {
         // Configurar ViewBinding
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Insertar Toolbar
+        setSupportActionBar(findViewById(R.id.toolbar))
 
         // Verificar si el usuario ya está logueado
         lifecycleScope.launch {
@@ -51,6 +55,8 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
+
+
     }
 
     private fun navigateToProjectList() {

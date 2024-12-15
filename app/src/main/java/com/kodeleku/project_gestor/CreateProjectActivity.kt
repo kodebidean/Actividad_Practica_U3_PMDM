@@ -7,13 +7,14 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.lifecycleScope
 import com.kodeleku.project_gestor.databinding.ActivityCreateProjectBinding
 import com.kodeleku.project_gestor.models.Project
 import kotlinx.coroutines.launch
 import java.util.*
 
-class CreateProjectActivity : AppCompatActivity() {
+class CreateProjectActivity : BaseActivity() {
 
     private lateinit var binding: ActivityCreateProjectBinding
     private var selectedLanguageId: Int? = null
@@ -27,6 +28,9 @@ class CreateProjectActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         loadLanguages()
+
+        // Insertar Toolbar
+        setSupportActionBar(findViewById(R.id.toolbar))
 
         // Configurar el botón de fecha
         binding.btnStartDate.setOnClickListener {
@@ -46,6 +50,8 @@ class CreateProjectActivity : AppCompatActivity() {
                 Toast.makeText(this, "Completa todos los campos", Toast.LENGTH_SHORT).show()
             }
         }
+
+
     }
 
     private fun loadLanguages() {

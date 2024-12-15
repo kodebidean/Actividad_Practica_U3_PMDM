@@ -29,4 +29,5 @@
     <string name="ingrese_descripci_n_del_proyecto">Ingrese descripción del proyecto</string>
     <string name="ingrese_nombre_del_proyecto">Ingrese nombre del proyecto</string>
     <string name="lenguaje">Lenguaje:</string>
+    <string name="cerrar_sesi_n">Cerrar sesión</string>
 </resources>

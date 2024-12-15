@@ -10,7 +10,7 @@ import com.kodeleku.project_gestor.R
 import com.kodeleku.project_gestor.models.Project
 
 class ProjectAdapter(
-    private val projects: List<Project>,
+    private val projects: MutableList<Project>, // Cambiado a MutableList
     private val languages: Map<Int, String>, // Mapa de id -> nombre del lenguaje
     private val onClick: (Project) -> Unit
 ) : RecyclerView.Adapter<ProjectAdapter.ProjectViewHolder>() {
@@ -22,11 +22,22 @@ class ProjectAdapter(
 
     override fun onBindViewHolder(holder: ProjectViewHolder, position: Int) {
         val project = projects[position]
-        holder.bind(project, languages) // Pasa el mapa de lenguajes al método bind
+        holder.bind(project, languages)
         holder.itemView.setOnClickListener { onClick(project) }
     }
 
     override fun getItemCount(): Int = projects.size
+
+    /**
+     * Método para actualizar un proyecto en la lista.
+     */
+    fun updateProject(updatedProject: Project) {
+        val index = projects.indexOfFirst { it.id == updatedProject.id }
+        if (index != -1) {
+            projects[index] = updatedProject
+            notifyItemChanged(index) // Notifica que un elemento específico ha cambiado
+        }
+    }
 
     class ProjectViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val projectName: TextView = itemView.findViewById(R.id.tv_project_name)
@@ -43,4 +54,3 @@ class ProjectAdapter(
         }
     }
 }
-
