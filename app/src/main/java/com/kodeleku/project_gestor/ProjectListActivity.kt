@@ -16,13 +16,12 @@ class ProjectListActivity : BaseActivity() {
     private lateinit var binding: ActivityProjectListBinding
     private lateinit var adapter: ProjectAdapter
 
-    // Registrar el callback para manejar los resultados de ProjectDetailActivity
+    // Callback para manejar resultados de ProjectDetailActivity
     private val projectDetailLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
         if (result.resultCode == RESULT_OK) {
-            // Recargar proyectos después de actualizar un proyecto
-            loadProjects()
+            loadProjects() // Recargar proyectos tras actualizar detalles
         }
     }
 
@@ -49,8 +48,7 @@ class ProjectListActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-        // Recargar proyectos para reflejar actualizaciones
-        loadProjects()
+        loadProjects() // Recargar proyectos al volver a esta actividad
     }
 
     private fun loadProjects() {
@@ -60,28 +58,41 @@ class ProjectListActivity : BaseActivity() {
 
             if (projects.isNotEmpty()) {
                 val languageMap = languages.associateBy({ it.id }, { it.name })
-                adapter = ProjectAdapter(projects.toMutableList(), languageMap) { project ->
-                    openProjectDetailScreen(project)
-                }
+                adapter = ProjectAdapter(
+                    projects.toMutableList(),
+                    languageMap,
+                    onClick = { project -> openProjectDetailScreen(project) },
+                    onDelete = { project -> deleteProject(project) } // Callback para borrar
+                )
                 binding.projectRecyclerView.adapter = adapter
             } else {
                 Toast.makeText(this@ProjectListActivity, "No hay proyectos disponibles", Toast.LENGTH_SHORT).show()
             }
         }
     }
+
     private fun openProjectDetailScreen(project: Project) {
         val intent = Intent(this, ProjectDetailActivity::class.java)
         intent.putExtra("PROJECT_ID", project.id)
-        projectDetailLauncher.launch(intent) // Usar ActivityResultContracts para obtener resultados
+        projectDetailLauncher.launch(intent) // Lanzar con resultado
     }
 
     private fun openCreateProjectScreen() {
         val intent = Intent(this, CreateProjectActivity::class.java)
-        startActivity(intent) // No necesita callback
+        startActivity(intent) // Sin resultado
     }
 
     private fun openCreateLanguageScreen() {
         val intent = Intent(this, CreateLanguageActivity::class.java)
-        startActivity(intent) // Tampoco necesita callback
+        startActivity(intent) // Sin resultado
+    }
+
+    private fun deleteProject(project: Project) {
+        lifecycleScope.launch {
+            MyApplication.database.projectDao().deleteProject(project)
+            adapter.removeProject(project) // Actualizar adaptador
+            Toast.makeText(this@ProjectListActivity, "Proyecto eliminado", Toast.LENGTH_SHORT).show()
+        }
     }
 }
+

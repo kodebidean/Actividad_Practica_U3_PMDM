@@ -41,11 +41,12 @@
             android:id="@+id/btn_delete_project"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Borrar"
+            android:text="@string/borrar"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:padding="8dp"
+            android:backgroundTint="@color/red"
             android:layout_marginTop="8dp"/>
 
     </LinearLayout>
